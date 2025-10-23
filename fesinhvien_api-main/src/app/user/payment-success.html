@@ -1,0 +1,61 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+  <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
+    <!-- Success/Failure Icon -->
+    <div class="mb-6">
+      <div *ngIf="isSuccess" class="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
+        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <div *ngIf="!isSuccess" class="mx-auto w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-4">
+        <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Status Message -->
+    <h2 class="text-2xl font-bold mb-4" [ngClass]="isSuccess ? 'text-green-600' : 'text-red-600'">
+      {{ message }}
+    </h2>
+
+    <!-- Transaction Details -->
+    <div *ngIf="transactionId" class="bg-gray-50 rounded-lg p-4 mb-6 text-left">
+      <h3 class="font-semibold text-gray-900 mb-3">📋 Chi tiết giao dịch</h3>
+      <div class="space-y-2 text-sm">
+        <div *ngIf="transactionId" class="flex justify-between">
+          <span class="text-gray-600">Mã giao dịch:</span>
+          <span class="font-mono text-gray-900">{{ transactionId }}</span>
+        </div>
+        <div *ngIf="amount" class="flex justify-between">
+          <span class="text-gray-600">Số tiền:</span>
+          <span class="font-semibold text-gray-900">{{ formatAmount(amount) }}</span>
+        </div>
+        <div *ngIf="orderInfo" class="flex justify-between">
+          <span class="text-gray-600">Mô tả:</span>
+          <span class="text-gray-900 text-right">{{ orderInfo }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="space-y-3">
+      <button 
+        (click)="goToPayment()" 
+        class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+        💳 Xem thông tin học phí
+      </button>
+      <button 
+        (click)="goToHome()" 
+        class="w-full px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+        🏠 Về trang chủ
+      </button>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="mt-6 text-xs text-gray-500">
+      <p *ngIf="isSuccess">✅ Giao dịch đã được xử lý thành công</p>
+      <p *ngIf="!isSuccess">❌ Vui lòng thử lại hoặc liên hệ hỗ trợ</p>
+    </div>
+  </div>
+</div>
